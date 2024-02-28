@@ -16,6 +16,7 @@ namespace TextEditor
             Console.WriteLine("O que você deseja fazer?");
             Console.WriteLine("1 - Abrir arquivo");
             Console.WriteLine("2 - Criar novo arquivo");
+            Console.WriteLine("3 - Deletar arquivo");
             Console.WriteLine("0 - Sair");
 
             short option = short.Parse(Console.ReadLine());
@@ -25,6 +26,7 @@ namespace TextEditor
                 case 0: System.Environment.Exit(0); break;
                 case 1: Open(); break;
                 case 2: Edit(); break;
+                case 3: Delete(); break;
                 default: Menu(); break;
             }
         }
@@ -64,6 +66,25 @@ namespace TextEditor
             Save(text);
         }
 
+static void Delete() {
+            Console.Clear();
+            Console.WriteLine("Qual o caminho do arquivo que deseja deletar?");
+            var path = Console.ReadLine();
+
+            // Se o arquivo existir, ele deleta
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+                Console.WriteLine($"Arquivo {path} deletado com sucesso!");
+            }
+            else
+            {
+                Console.WriteLine("Arquivo não encontrado!");
+            }
+
+            Console.ReadLine();
+            Menu();
+}
         static void Save(string text)
         {
             Console.Clear();
